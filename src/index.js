@@ -1,13 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {Routes} from './routes';
+//import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client';
+import  {ApolloClient}  from '@apollo/client/core';
+import  {InMemoryCache}  from '@apollo/client/cache';
+import 'semantic-ui-css/semantic.min.css'
+//import Button from '@material-ui/core/Button';
+
+
+const client = new ApolloClient({
+  uri: 'http://localhost:8081/graphql',
+  cache: new InMemoryCache()
+});
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+ 
+    <ApolloProvider client={client}>
+    <Routes />
+    </ApolloProvider>,
+   
+
   document.getElementById('root')
 );
 
