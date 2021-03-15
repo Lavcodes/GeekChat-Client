@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Message, Input, Container, Header} from 'semantic-ui-react'
+import { Form, Button, Message, Input, Container, Header} from 'semantic-ui-react'
 import { useQuery, gql, useMutation } from '@apollo/client';
 import { Redirect } from 'react-router-dom';
 
@@ -85,26 +85,37 @@ function Register() {
                <Header as="h2">
                    Register
                </Header>
-               <Input 
-                error={!!usernameError}
-                name="username" 
-                onChange={onInputChange}  
-                value={username} 
-                placeholder="Username" fluid />
-               <Input 
-               error ={!!emailError}
-               name="email" 
-               onChange={onInputChange} 
-               value={email} 
-               placeholder="Email" fluid />
-               <Input 
-               error ={passwordError}
-               name="password" 
-               onChange={onInputChange} 
-               value={password} type="password" 
-               placeholder="Password" fluid/>
+               <Form>
+                   <Form.Field  error={!!usernameError}>
+                   <Input 
+                      name="username" 
+                      onChange={onInputChange}  
+                      value={username} 
+                      placeholder="Username" fluid />
+
+                   </Form.Field>
+                   <Form.Field error ={!!emailError}>
+                   <Input 
+                      name="email" 
+                      onChange={onInputChange} 
+                      value={email} 
+                      placeholder="Email" fluid />
+
+                   </Form.Field>
+                   <Form.Field  error ={!!passwordError}>
+                   <Input 
+                      name="password" 
+                      onChange={onInputChange} 
+                      value={password} type="password" 
+                      placeholder="Password" fluid/>
                
+
+                   </Form.Field>
+               
+               
+              
                <Button onClick={onSubmit}>Submit</Button>
+               </Form>
                {
                   (usernameError || emailError || passwordError)?(<Message
                   error 
@@ -118,6 +129,7 @@ function Register() {
                     ]
                   }></Message>): null
                }
+               
            </Container>
         );
     }

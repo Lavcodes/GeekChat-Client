@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Button, Message, Input, Container, Header} from 'semantic-ui-react';
+import { Form, Button, Message, Input, Container, Header} from 'semantic-ui-react';
 import {  gql, useMutation } from '@apollo/client';
+import { Redirect } from 'react-router-dom';
 
 function Login (){
     const LoginMutation = gql`
@@ -19,7 +20,9 @@ function Login (){
     
    `;
     const [email , setEmail] = useState('');
+    const [emailError, setEmailError]= useState('');
     const [password, setPassword] = useState('');
+    const [passwordError, setPasswordError]= useState('');
     const [loginUser]= useMutation(LoginMutation,{
         variables:{
            
@@ -38,6 +41,8 @@ function Login (){
         else if(name==='password'){
             setPassword(value);
         }
+        setEmailError('');
+        setPasswordError(''); 
         
     }
     const onSubmit = async()=>{
@@ -47,6 +52,20 @@ function Login (){
             if(ok){
                 localStorage.setItem('token', token);
                 localStorage.setItem('refreshToken', refreshToken);
+                <Redirect to = "./Home"></Redirect>
+            }
+            else{
+              
+                errors.forEach(({ path, message}) => {
+                   
+                     if(path==='email'){
+                      setEmailError(message);
+                  }
+                  else if(path==='password'){
+                      setPasswordError(message);
+                  }
+                });
+                
             }
 
             console.log(data.Login);
@@ -62,21 +81,44 @@ function Login (){
                <Header as="h2">
                    Login
                </Header>
+               <Form>
+                   <Form.Field error ={!!emailError}>
+                   <Input 
                
-               <Input 
+                    name="email" 
+                    onChange={onInputChange} 
+                    value={email} 
+                    placeholder="Email" fluid />
+
+                   </Form.Field>
+                   <Form.Field error ={!!passwordError}>
+                   <Input 
                
-               name="email" 
-               onChange={onInputChange} 
-               value={email} 
-               placeholder="Email" fluid />
-               <Input  
-               name="password" 
-               onChange={onInputChange} 
-               value={password} type="password" 
-               placeholder="Password" fluid/>
-               
+                      name="password" 
+                      onChange={onInputChange} 
+                      value={password} 
+                      placeholder="Password" fluid />
+
+                   </Form.Field>
+                 
+              
                <Button onClick={onSubmit}>Submit</Button>
               
+
+               </Form>
+               {
+                   ( emailError || passwordError)?(<Message
+                    error 
+                    header="Invalid values"
+                    list={[
+                        emailError?emailError:null,
+                        passwordError?passwordError:null,
+                    ]
+
+                    }></Message>): null
+               }
+               
+               
            </Container>
 
     );
