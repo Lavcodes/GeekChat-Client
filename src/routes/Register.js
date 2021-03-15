@@ -75,8 +75,7 @@ function Register() {
         }
         setUsernameError('');
         setEmailError('');
-        setPasswordError('');
-         
+        setPasswordError(''); 
     }
    
         return(
