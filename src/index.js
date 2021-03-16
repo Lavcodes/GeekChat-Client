@@ -3,17 +3,63 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import {Routes} from './routes';
 //import { ApolloClient, InMemoryCache } from '@apollo/client';
-import { ApolloProvider } from '@apollo/client';
+import { ApolloProvider, createHttpLink, ApolloLink, concat,  from } from '@apollo/client';
 import  {ApolloClient}  from '@apollo/client/core';
 import  {InMemoryCache}  from '@apollo/client/cache';
 import 'semantic-ui-css/semantic.min.css'
+
+import { setContext } from '@apollo/client/link/context';
 //import Button from '@material-ui/core/Button';
 
+const httpLink = createHttpLink({ uri: 'http://localhost:8081/graphql' });
 
+const authMiddleware = new ApolloLink((operation, forward) => {
+  // add the authorization to the headers
+  operation.setContext(({ headers = {} })=>({
+    headers: {
+      ...headers,
+      authorization: localStorage.getItem('token') || null,
+    }
+  }));
+
+  return forward(operation);
+})
+const tokenMiddleware = new ApolloLink((operation, forward) => {
+  // add the recent-activity custom header to the headers
+  operation.setContext(({ headers = {} }) => ({
+    headers: {
+      ...headers,
+      'x-token': localStorage.getItem('token') ,
+      'x-refresh-token' :localStorage.getItem('refreshToken'),
+    }
+  }));
+
+  return forward(operation);
+})
+/*const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('token')
+  headers['x-token']= token
+  headers['x-refresh-token']=localStorage.getItem('refreshToken')
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+      'x-token':token,
+      'x-refresh-token' : localStorage.getItem('refreshToken'),
+    }
+  }
+})*/
 const client = new ApolloClient({
-  uri: 'http://localhost:8081/graphql',
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+  link:from([
+    authMiddleware,
+    tokenMiddleware,
+    httpLink
+  ])
+  
 });
+
+
 
 
 ReactDOM.render(

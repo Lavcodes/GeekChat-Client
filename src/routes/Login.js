@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Form, Button, Message, Input, Container, Header} from 'semantic-ui-react';
 import {  gql, useMutation } from '@apollo/client';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 function Login (){
+    let history = useHistory();
     const LoginMutation = gql`
     
         mutation ($email: String!, $password: String!){
@@ -52,7 +53,8 @@ function Login (){
             if(ok){
                 localStorage.setItem('token', token);
                 localStorage.setItem('refreshToken', refreshToken);
-                <Redirect to = "./Home"></Redirect>
+                //console.log(data);
+                history.push('/');
             }
             else{
               

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Form, Button, Message, Input, Container, Header} from 'semantic-ui-react'
-import { useQuery, gql, useMutation } from '@apollo/client';
-import { Redirect } from 'react-router-dom';
+import { gql, useMutation } from '@apollo/client';
+import { useHistory } from 'react-router-dom';
 
 function Register() {
+    let history = useHistory();
     const RegisterMutation = gql`
     
         mutation ($username: String!, $email: String!, $password: String!){
@@ -36,7 +37,8 @@ function Register() {
           const { data } = await registerUser();
           const {ok, errors }= data.Register;
           if(ok){
-              <Redirect to = "./Home"></Redirect>
+            console.log(data);
+            history.push('/');
           }
           else{
             

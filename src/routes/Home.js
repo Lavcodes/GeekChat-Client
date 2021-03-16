@@ -13,7 +13,7 @@ function AllUsers() {
     const { loading, error, data } = useQuery(allUsersQuery);
   
     if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error :(</p>;
+    if (error) console.log(data);
         return(
             data.allUsers.map(u=>(
                 <h1 key= {u.id}>{u.username}</h1>
