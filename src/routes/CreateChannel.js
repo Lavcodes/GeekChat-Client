@@ -42,6 +42,7 @@ function CreateChannel (){
 
         } catch (e){
             console.log(e);
+            history.push('/login');
         }
         
     }
