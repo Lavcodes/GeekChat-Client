@@ -44,14 +44,18 @@ font-size: 2rem;
     padding: 2rem 0;
     font-weight: bold;
     letter-spacing: 0.5rem;
-`
+`;
+
 const Astyle2= styled.div`
 font-size: 1rem;
     text-align: center;
     color : rgba(230, 213, 227,1);
     padding: 2rem 0;
     letter-spacing: 0.25rem;
-`
+`;
+
+
+
 const SubField = ({ id, name}) =><div>
     <Basic>#<t></t>{name}</Basic>
     
@@ -74,6 +78,7 @@ const SubChannels =({
         <NameWrapper>
         
         <Astyle2>
+           
         <Icon inverted color='grey' name="user" size='large' /> 
         {username}
         </Astyle2>

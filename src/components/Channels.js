@@ -9,10 +9,17 @@ const SideBarWrapper = styled.div`
   background-color: #300d2a;
   border-radius : 5px;
 `;
+
 const IconStyle = styled.div`
 padding : 0.5em;
 margin: 0.5em;
+&:hover {
+    border-style: solid;
+    border-width: thick;
+    border-color: #767676;
+  }
 `;
+
 
 const ChannelList = styled.ul`
   width: 100%;
