@@ -58,7 +58,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       <PrivateRoute path="/createchannel" exact component={CreateChannel}/>
     </Switch>
     <Switch>
-      <PrivateRoute path="/view-channel" exact component={ViewChnanel}/>
+      <PrivateRoute path="/view-channel/:channel_id?" exact component={ViewChnanel}/>
     </Switch>
     </BrowserRouter>
   );

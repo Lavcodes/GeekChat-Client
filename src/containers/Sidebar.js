@@ -5,6 +5,7 @@ import decode from 'jwt-decode';
 
 import SubChannels from '../components/SubChannels';
 import Channels from '../components/Channels';
+import InvitePeopleModal from '../components/InvitePeopleModal';
 
 const allChannelsQuery = gql`
   {
@@ -16,13 +17,22 @@ const allChannelsQuery = gql`
 `;
 
 const Sidebar = ({currentChannelId}) => {
+  const [openInvitePeopleModal, setOpenInvitePeopleModal]= useState(false);
+  const handleInvitePeopleClick = () => {
+   setOpenInvitePeopleModal(true);
+  };
+
+  const handleCloseInvitePeopleModal = () => {
+    setOpenInvitePeopleModal(false);
+  };
+
   const { loading, error, data } = useQuery(allChannelsQuery);
   if (loading) {
     return null;
   }
   if (error) console.log(data);
   const {allChannels} = data;
-  const channelIdx = _.findIndex(allChannels, (['id',parseInt(currentChannelId, 10)]));
+  const channelIdx = currentChannelId?_.findIndex(allChannels, (['id',parseInt(currentChannelId, 10)])):0;
   const channel = allChannels[channelIdx];
   
   let username = '';
@@ -56,7 +66,14 @@ const Sidebar = ({currentChannelId}) => {
         {id:3, name:"Alice"},
         {id:4, name:"Max"}
     ]}
+    onInvitePeopleClick={handleInvitePeopleClick}
     />,
+    <InvitePeopleModal
+        channel_id={channel.id}
+        onClose={handleCloseInvitePeopleModal}
+        open={openInvitePeopleModal}
+        key="invite-people-modal"
+      />,
   ];
 };
 export default Sidebar;

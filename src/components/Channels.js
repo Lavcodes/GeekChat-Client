@@ -1,6 +1,7 @@
 import React from 'react';
 import { Icon } from 'semantic-ui-react';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
 
 const SideBarWrapper = styled.div`
 
@@ -46,7 +47,7 @@ const ChannelListItem = styled.li`
   }
 `;
 
-const channel = ({ id, letter }) => <ChannelListItem key={`channel-${id}`}>{letter}</ChannelListItem>;
+const channel = ({ id, letter }) =><Link to={`/view-channel/${id}`}> <ChannelListItem key={`channel-${id}`}>{letter}</ChannelListItem> </Link> ;
 
 
 const Channels= ({channels}) => (

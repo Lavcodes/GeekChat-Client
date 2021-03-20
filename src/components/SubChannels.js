@@ -57,7 +57,7 @@ font-size: 1rem;
 
 
 const SubField = ({ id, name}) =><div>
-    <Basic>#<t></t>{name}</Basic>
+    <Basic>#{name}</Basic>
     
 </div> 
 const User = ({ id, name }) => <Basic>
@@ -65,7 +65,7 @@ const User = ({ id, name }) => <Basic>
     {name}</Basic>;
 
 const SubChannels =({
-    channelName, username, SubFields, users,
+    channelName, username, SubFields, users, onInvitePeopleClick,
   }) => (
     <ChannelWrapper>
         <NameWrapper>
@@ -99,6 +99,12 @@ const SubChannels =({
       </DivStyles>
       <div>
           {users.map(User)}
+      </div>
+      <div>
+          <a href="#invite-people" onClick={onInvitePeopleClick}>
+          + Invite People
+          </a>
+          
       </div>
     </ChannelWrapper>
   );
