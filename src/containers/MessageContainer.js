@@ -19,7 +19,9 @@ query($channel_id: Int!) {
     allMessages(channel_id: $channel_id) {
       id
       text
-     
+      user{
+        username
+      }
       createdAt
     }
 }
@@ -40,7 +42,6 @@ const MessageContainer = ({channelId})=>{
               return prev;
           }
           const newChannelMessage = subscriptionData.data.newChannelMessage;
-          console.log(newChannelMessage);
            return {
               ...prev,
               allMessages: [...prev.allMessages, newChannelMessage],
@@ -71,10 +72,10 @@ const MessageContainer = ({channelId})=>{
         
         <Messages>
          <Comment.Group>
-        {allMessages.map(m => (
+        {allMessages.map((m, index) => (
           <Comment key={`${m.id}-message`}>
             <Comment.Content>
-              <Comment.Author as="a">me</Comment.Author>
+              <Comment.Author as="a">{m.user.username}</Comment.Author>
               <Comment.Metadata>
                 <div>{m.createdAt}</div>
               </Comment.Metadata>

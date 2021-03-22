@@ -9,11 +9,17 @@ import InvitePeopleModal from '../components/InvitePeopleModal';
 import SendMessage from '../components/SendMessage';
 import MessageContainer from '../containers/MessageContainer';
 
-const allChannelsQuery = gql`
+const getUserQuery = gql`
   {
-    allChannels {
+    getUser {
       id
-      channelname
+      username
+      email
+      channels{
+        id
+        channelname
+      }
+     
     }
   }
 `;
@@ -28,14 +34,16 @@ const Sidebar = ({currentChannelId}) => {
     setOpenInvitePeopleModal(false);
   };
 
-  const { loading, error, data } = useQuery(allChannelsQuery);
+  const { loading, error, data } = useQuery(getUserQuery);
   if (loading) {
     return null;
   }
   if (error) console.log(error);
-  const {allChannels} = data;
-  const channelIdx = currentChannelId?_.findIndex(allChannels, (['id',parseInt(currentChannelId, 10)])):0;
-  const channel = allChannels[channelIdx];
+  if(data) console.log(data)
+  const { channels } = data.getUser;
+  
+  const channelIdx = currentChannelId?_.findIndex(channels, (['id',parseInt(currentChannelId, 10)])):0;
+  const channel = channels[channelIdx];
   
   let username = '';
   try {
@@ -48,7 +56,7 @@ const Sidebar = ({currentChannelId}) => {
   return [
     <Channels
     key="channel-sidebar"
-    channels={allChannels.map(c=>({
+    channels={channels.map(c=>({
         id:c.id,
         letter: c.channelname.charAt(0).toUpperCase(),
     }))}
