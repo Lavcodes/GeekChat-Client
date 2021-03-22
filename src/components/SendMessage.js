@@ -14,25 +14,7 @@ const SendMessageWrapper = styled.div`
 const ENTER_KEY = 13;
 
 const SendMessage= ({channelId}) => {
-  const allChannelsQuery = gql`
-  {
-    allChannels {
-      id
-      channelname
-    }
-  }
-`;
-
-const { loading, error, data } = useQuery(allChannelsQuery);
-  if(loading) {<p>loading..</p>};
-  if (error) console.log(data);
-  const {allChannels} = data;
-  const channelIdx = channelId?_.findIndex(allChannels, (['id',parseInt(channelId, 10)])):0;
-  const channel_id = allChannels[channelIdx].id;
-
-
-  console.log(channelId);
-  
+  const channel_id = parseInt(channelId, 10);
   const createMessageMutation = gql`
   mutation( $text: String!, $channel_id: Int!,) {
     createMessage( text: $text, channel_id: $channel_id,)

@@ -6,6 +6,8 @@ import decode from 'jwt-decode';
 import SubChannels from '../components/SubChannels';
 import Channels from '../components/Channels';
 import InvitePeopleModal from '../components/InvitePeopleModal';
+import SendMessage from '../components/SendMessage';
+import MessageContainer from '../containers/MessageContainer';
 
 const allChannelsQuery = gql`
   {
@@ -30,7 +32,7 @@ const Sidebar = ({currentChannelId}) => {
   if (loading) {
     return null;
   }
-  if (error) console.log(data);
+  if (error) console.log(error);
   const {allChannels} = data;
   const channelIdx = currentChannelId?_.findIndex(allChannels, (['id',parseInt(currentChannelId, 10)])):0;
   const channel = allChannels[channelIdx];
@@ -74,6 +76,9 @@ const Sidebar = ({currentChannelId}) => {
         open={openInvitePeopleModal}
         key="invite-people-modal"
       />,
+      <MessageContainer channelId={channel.id}></MessageContainer> ,
+      <SendMessage channelId={channel.id}/>,
+      
   ];
 };
 export default Sidebar;
