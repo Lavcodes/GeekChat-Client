@@ -37,7 +37,7 @@ function CreateChannel (){
             const {ok, errors }= data.createChannel;
             if(ok){
                 console.log(data);
-                history.push('/');
+                history.push('/view-channel');
             }
 
         } catch (e){

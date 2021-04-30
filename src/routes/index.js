@@ -46,10 +46,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   return (
     <BrowserRouter>
     <Switch>
-      <Route path="/" exact component={AllUsers}/>
-    </Switch>
-    <Switch>
-      <Route path="/register" exact component={Register}/>
+      <Route path="/" exact component={Register}/>
     </Switch>
     <Switch>
       <Route path="/login" exact component={Login}/>

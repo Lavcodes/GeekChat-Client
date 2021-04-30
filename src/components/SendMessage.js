@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { gql, useMutation,  useQuery  } from '@apollo/client';
 import styled from 'styled-components';
-import { Input } from 'semantic-ui-react';
+import { Button, Icon, Input  } from 'semantic-ui-react';
 import _ from 'lodash';
 
+import FileUpload from '../components/FileUpload';
 
 const SendMessageWrapper = styled.div`
   grid-column: 3;
   grid-row: 3;
   margin: 20px;
+  display: grid;
+  grid-template-columns: 50px auto;
 `;
 
 const ENTER_KEY = 13;
@@ -49,6 +52,7 @@ const [createMessage]= useMutation(createMessageMutation,{
 
   return (
     <SendMessageWrapper>
+      <FileUpload/>
     <Input 
       name='send-text'
       value={text}
@@ -60,6 +64,8 @@ const [createMessage]= useMutation(createMessageMutation,{
       onChange={onInputChange}
       fluid 
       placeholder={`Type a Message #${channel_id}`} />
+      
+      
   </SendMessageWrapper>
   );
 };

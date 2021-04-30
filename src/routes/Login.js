@@ -54,7 +54,7 @@ function Login (){
                 localStorage.setItem('token', token);
                 localStorage.setItem('refreshToken', refreshToken);
                 //console.log(data);
-                history.push('/');
+                history.push('/createchannel');
             }
             else{
               

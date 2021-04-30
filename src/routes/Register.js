@@ -38,7 +38,7 @@ function Register() {
           const {ok, errors }= data.Register;
           if(ok){
             console.log(data);
-            history.push('/');
+            history.push('/login');
           }
           else{
             
