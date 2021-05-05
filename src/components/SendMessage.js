@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Button, Icon, Input  } from 'semantic-ui-react';
 import _ from 'lodash';
 
-import FileUpload from '../components/FileUpload';
+//import FileUpload from '../components/FileUpload';
 
 const SendMessageWrapper = styled.div`
   grid-column: 3;
@@ -52,7 +52,6 @@ const [createMessage]= useMutation(createMessageMutation,{
 
   return (
     <SendMessageWrapper>
-      <FileUpload/>
     <Input 
       name='send-text'
       value={text}
@@ -64,8 +63,6 @@ const [createMessage]= useMutation(createMessageMutation,{
       onChange={onInputChange}
       fluid 
       placeholder={`Type a Message #${channel_id}`} />
-      
-      
   </SendMessageWrapper>
   );
 };

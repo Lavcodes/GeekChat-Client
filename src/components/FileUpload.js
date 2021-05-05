@@ -1,15 +1,37 @@
-import React, { useCallback } from 'react';
+/*import React, {useCallback, useState, useEffect} from 'react';
 import { Button, Icon} from 'semantic-ui-react';
 import { useDropzone } from 'react-dropzone';
+import { gql, useMutation } from '@apollo/client';
 
-function FileUpload() {
-  const onDrop = useCallback(acceptedFiles => {
-    console.log(acceptedFiles);
-  }, []);
+function FileUpload({channel_id}) {
+
+  const createFileMessageMutation = gql`
+  mutation($channel_id: Int!, $file: Upload) {
+    createMessage(channel_id: $channel_id, file: $file)
+  }
+`;
+
+const [createMessage]= useMutation(createFileMessageMutation);
+   
+   
+const onDrop = useCallback( 
+  (acceptedfiles) => {
+    const file = acceptedfiles[0];
+    console.log(file.type);
+   createMessage({ variables: {
+      channel_id,
+      file } });
+  },
+  [createMessage]
+);
+
+  
+
 
   const {
     getRootProps,
-    getInputProps
+    getInputProps,
+    isDragActive
   } = useDropzone({
     onDrop
   });
@@ -17,9 +39,12 @@ function FileUpload() {
   return (
     <div {...getRootProps()}>
       <input {...getInputProps()} />
+      {isDragActive ? (
+        <p>Drop the files here ...</p>
+      ) :
       <Button icon>
         <Icon name="plus" />
-      </Button>
+      </Button>}
     </div>
   )
 }
@@ -81,4 +106,5 @@ const createFileMessageMutation = gql`
   }
 `;
 
-export default graphql(createFileMessageMutation)(FileUpload);*/
+export default graphql(createFileMessageMutation)(FileUpload);
+*/
