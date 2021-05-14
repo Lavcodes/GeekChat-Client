@@ -11,7 +11,7 @@ const SendMessageWrapper = styled.div`
   grid-row: 3;
   margin: 20px;
   display: grid;
-  grid-template-columns: 50px auto;
+  grid-template-columns: auto;
 `;
 
 const ENTER_KEY = 13;

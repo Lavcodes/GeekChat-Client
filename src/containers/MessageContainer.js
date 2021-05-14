@@ -2,14 +2,12 @@ import React, { useEffect, useState }from 'react';
 import { useQuery, gql } from '@apollo/client';
 import Messages from '../components/Messages';
 import { Comment } from 'semantic-ui-react';
-import FileUpload from '../components/FileUpload';
 
 const newChannelMessageSubscription = gql`
 subscription($channel_id: Int!) {
   newChannelMessage(channel_id: $channel_id) {
     id
     text
-    
     createdAt
   }
 }

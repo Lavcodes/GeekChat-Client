@@ -7,7 +7,7 @@ const SideBarWrapper = styled.div`
 
   grid-column: 1;
   grid-row: 1 / 4;
-  background-color: #300d2a;
+  background-color: #f3743b;
   border-radius : 5px;
 `;
 

@@ -1,11 +1,7 @@
 import React from 'react';
 import Head from '../components/Header';
 import AppLayout from '../components/AppLayout';
-import Messages from '../components/Messages';
 import Sidebar from '../containers/Sidebar';
-import SendMessage from '../components/SendMessage';
-import MessageContainer from '../containers/MessageContainer';
-
 
 function ViewChannel({match :{params}}){
    return (

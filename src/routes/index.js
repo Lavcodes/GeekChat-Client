@@ -1,3 +1,5 @@
+
+import React, { Component } from 'react'
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,6 +14,8 @@ import decode from 'jwt-decode';
  import Register from './Register';
  import CreateChannel from './CreateChannel';
  import ViewChnanel from './ViewChannel';
+
+ 
 
  const isAuthenticated = () => {
   const token = localStorage.getItem('token');
@@ -46,7 +50,10 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   return (
     <BrowserRouter>
     <Switch>
-      <Route path="/" exact component={Register}/>
+      <Route path="/" exact component={AllUsers}/>
+    </Switch>
+    <Switch>
+      <Route path="/register" exact component={Register}/>
     </Switch>
     <Switch>
       <Route path="/login" exact component={Login}/>

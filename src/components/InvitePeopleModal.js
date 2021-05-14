@@ -1,7 +1,6 @@
 import React, {useState}from 'react';
 import { Form, Input, Button, Modal } from 'semantic-ui-react';
 import { useMutation, gql } from '@apollo/client';
-import normalizeErrors from '../normalizeErrors';
 
 
 function InvitePeopleModal({open , onClose, channel_id}){
